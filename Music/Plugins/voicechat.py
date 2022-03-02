@@ -33,12 +33,12 @@ Only for Sudo Users
 async def activevc(_, message: Message):
     global get_queue
     if await is_active_chat(message.chat.id):
-        mystic = await message.reply_text("Please Wait... Getting Queue..")
+        mystic = await message.reply_text("الرجاء الانتظار ... جاري الحصول على قائمة الانتظار..")
         dur_left = db_mem[message.chat.id]["left"]
         duration_min = db_mem[message.chat.id]["total"]
         got_queue = get_queue.get(message.chat.id)
         if not got_queue:
-            await mystic.edit(f"Nothing in Queue")
+            await mystic.edit(f"لا شيء في قائمة الانتظار")
         fetched = []
         for get in got_queue:
             fetched.append(get)
@@ -77,7 +77,7 @@ async def activevc(_, message: Message):
         else:
             await mystic.edit(msg)
     else:
-        await message.reply_text(f"Nothing in Queue")
+        await message.reply_text(f"لا شيء في قائمة الانتظار")
 
 
 @app.on_message(filters.command("activevc") & filters.user(SUDOERS))
@@ -105,7 +105,7 @@ async def activevc(_, message: Message):
             text += f"<b>{j + 1}. {title}</b> [`{x}`]\n"
         j += 1
     if not text:
-        await message.reply_text("No Active Voice Chats")
+        await message.reply_text("لا توجد محادثات صوتية نشطة")
     else:
         await message.reply_text(
             f"**Active Voice Chats:-**\n\n{text}",
@@ -124,7 +124,7 @@ async def basffy(_, message):
     try:
         await userbot.join_chat(chat)
     except Exception as e:
-        await message.reply_text(f"Failed\n**Possible reason could be**:{e}")
+        await message.reply_text(f"باءت بالفشل\n**يمكن أن يكون السبب المحتمل**:{e}")
         return
     await message.reply_text("Joined.")
 
@@ -140,10 +140,10 @@ async def baaaf(_, message):
     try:
         await app.leave_chat(chat)
     except Exception as e:
-        await message.reply_text(f"Failed\n**Possible reason could be**:{e}")
+        await message.reply_text(f"باءت بالفشل\n**يمكن أن يكون السبب المحتمل**:{e}")
         print(e)
         return
-    await message.reply_text("Bot has left the chat successfully")
+    await message.reply_text("غادر البوت الدردشة بنجاح")
 
 
 @app.on_message(filters.command("leaveassistant") & filters.user(SUDOERS))
@@ -157,6 +157,6 @@ async def baujaf(_, message):
     try:
         await userbot.leave_chat(chat)
     except Exception as e:
-        await message.reply_text(f"Failed\n**Possible reason could be**:{e}")
+        await message.reply_text(f"باءت بالفشل\n**يمكن أن يكون السبب المحتمل**:{e}")
         return
     await message.reply_text("Left.")
